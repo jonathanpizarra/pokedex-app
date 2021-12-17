@@ -4,11 +4,48 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+
 h1{
     text-align: center;
-    margin: 1rem auto;
+    margin: 1rem auto ;
 }
 
+.app-title{
+    margin:1.5rem auto 1rem;
+    color:#111;
+}
+
+.api-link{
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.api-link a{
+    color:#555;
+}
 
 /*============== card ================*/
 .card-list{
@@ -45,13 +82,18 @@ h1{
     margin: 1rem auto;
     border:1px solid white;
     border-radius: 10px;
+    transition: transform 0.4s;
+}
+
+.card-img-container:hover .card-img{
+    transform: scale(1.08);
 }
 
 .card-img{
     width:200px;
     height:200px;
     display:block;
-    transition: transform 0.4s;
+    transition: transform 0.4s, width 0.4s;
 }
 
 .pokemon-name{
@@ -129,8 +171,11 @@ h1{
 }
 
 .pokemon-count{
-    text-align: center;
     color:#444;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -180,8 +225,12 @@ h1{
     border-bottom: 1px solid #efefef;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding:0 2rem;
+    
 }
 
 .page-button{
@@ -198,6 +247,24 @@ h1{
     background-color: gray;
     color:#efefef;
 }
+
+/*=========== search =================*/
+
+.search-container{
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.search-input{
+    height: 40px;
+    width:350px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1rem;
+}
+
 
 
 /*========== color types ===============*/
@@ -286,6 +353,10 @@ h1{
 
 /*============ empty ===============*/
 
+.empty-container{
+    width: 100%;
+}
 .empty{
     text-align: center;
+    width: 100%;
 }

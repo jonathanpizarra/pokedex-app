@@ -2,8 +2,8 @@ import React from 'react';
 
 const Empty = ()=>{
     return(
-        <div className='empty'>
-            <p>No Pokemons here yet</p>
+        <div className='empty-container'>
+            <p className='empty'>No Pokemons on this side of the planet. Try again later.</p>
         </div>
     )
 }
