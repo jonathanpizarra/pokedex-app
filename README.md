@@ -1,3 +1,3 @@
-# Pokedex Web App
+# Pokédex Web App
 
-A Pokedex app built using React and a free Pokemon API
+A Pokédex app built using React and a free Pokémon API
