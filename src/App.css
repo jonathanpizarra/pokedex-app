@@ -376,3 +376,34 @@ h1{
     text-align: center;
     width: 100%;
 }
+
+
+/*================ footer ==================*/
+
+.footer-container{
+    width:100%;
+    height:200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #eee;
+    margin-top: 2rem;
+    background-color: #eee;
+}
+
+.footer-container p{
+    font-size: 0.85rem;
+    font-weight: 500;
+    color:#444;
+}
+
+.footer-container p a{
+    text-decoration: none;
+    color:#444;
+}
+
+.footer-container p a:hover{
+    text-decoration: underline;
+    color:#333;
+}

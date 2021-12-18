@@ -4,6 +4,7 @@ import Pages from './Pages';
 import CardList from './CardList';
 import SearchBox from './SearchBox';
 import Empty from './Empty'
+import Footer from './Footer';
 import './App.css';
 import colors from './colors';
 class App extends Component{
@@ -104,6 +105,7 @@ class App extends Component{
                     <Empty/> : 
                     <CardList notifyPages={this.notifyPages} pokemons={this.state.pokemons} urls={this.state.urls} query={this.state.query} type={this.state.type} page={this.state.page}/>
                 }
+                <Footer/>
             </div>
             
         )
