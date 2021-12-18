@@ -34,6 +34,7 @@ h1{
 .app-title{
     margin:1.5rem auto 1rem;
     color:#111;
+    letter-spacing: 0.25rem;
 }
 
 .api-link{
@@ -45,6 +46,11 @@ h1{
 
 .api-link a{
     color:#555;
+    margin:1rem;
+}
+
+.api-link a:hover{
+    color: #888;
 }
 
 /*============== card ================*/
@@ -125,14 +131,20 @@ h1{
 .pokemon-type{
     border:1px solid gray;
     border-left:5px solid gray;
-    
     margin:10px;
     height: 30px;
     cursor: pointer;
     position: relative;
     z-index: 500;
     padding:0;
+    transition: transform 0.4s;
+    
 }
+
+.pokemon-type:hover{
+   transform: scaleX(1.05);
+}
+
 
 .type-hidden, .type-visible{
     height: 100%;
@@ -168,6 +180,10 @@ h1{
 
 .animate-hidden{
     width:100%;
+}
+
+.selected-type{
+    border-color: gray !important;
 }
 
 .pokemon-count{

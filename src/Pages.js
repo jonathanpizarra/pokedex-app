@@ -11,6 +11,7 @@ class Pages extends Component{
         
         this.state = {
             currentPage : props.page,
+            previousPage : 0,
             count : props.count,
             pages : pageCount,
         }
@@ -18,30 +19,46 @@ class Pages extends Component{
     }
 
     componentDidUpdate(prev){
-        if(prev.count !== this.props.count || prev.page !== this.props.page || prev.query !== this.props.query){
+        // update if :
+        // pokemon count has changed,
+        // user clicks new page number,
+        // user is typing,
+        // user clicks new type
+        if(prev.count !== this.props.count || prev.page !== this.props.page || prev.query !== this.props.query || prev.type !== this.props.type){
             let pageCount = Math.ceil(this.props.count/this.page_item_count);
             if (pageCount === 0) pageCount = 1;
             
+            // if user clicks new type
+            let newPrevious = this.state.currentPage;
+            let newCurrent = prev.type !== this.props.type? 1 : this.props.page
+
             this.setState({
-                currentPage : this.props.page,
+                currentPage : newCurrent,
+                previousPage : newPrevious,
                 count : this.props.count,
                 pages : pageCount
+            }, ()=>{
+                if(newPrevious !== newCurrent){
+                    if(newPrevious <= pageCount){
+                        document.querySelector(`button[val="${this.state.previousPage}"]`).classList.remove('selected-page');
+                    }
+                    document.querySelector(`button[val="${this.state.currentPage}"]`).classList.add('selected-page');
+                }
+
+
+
+                
             });
 
-            if(this.props.page === 1 && prev.page !== 1 && prev.query !== this.props.query){
-                document.querySelector(`button[val="1"]`).classList.toggle('selected-page');
-            }
         }
     }
 
     componentDidMount(){
-        document.querySelector(`button[val="${this.state.currentPage}"]`).classList.toggle('selected-page');
+        document.querySelector(`button[val="1"]`).classList.add('selected-page');
     }
 
     onPageClick = (val)=>{
         if(val !== this.state.currentPage){
-            document.querySelector(`button[val="${val}"]`).classList.toggle('selected-page');
-            document.querySelector(`button[val="${this.state.currentPage}"]`).classList.toggle('selected-page');
             this.props.onPageClick(val);
         }
        

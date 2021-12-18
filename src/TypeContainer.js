@@ -8,8 +8,9 @@ class TypeContainer extends Component{
         this.state = {
             types : [],
             types_url : [],
-            active: 13
+            selected_type : 13
         }
+        
     }
 
     componentDidMount(){
@@ -19,13 +20,27 @@ class TypeContainer extends Component{
                 this.setState({
                     types : res.results.map(type=> type.name),
                     types_url : res.results.map(type=>type.url)
+                },()=>{
+                    let type = this.state.types[this.state.selected_type-1];
+                    document.querySelector(`.type-${type} .type-hidden`).classList.add('animate-hidden');
+                    document.querySelector(`.type-${type}`).classList.add('selected-type');
                 })
 
             })
     }
 
-    onTypeClick = (type)=>{
-        this.props.onTypeClick(type);
+    onTypeClick = (id)=>{
+        this.props.onTypeClick(this.state.types_url[id-1]);
+        let type = this.state.types[this.state.selected_type-1];
+        document.querySelector(`.type-${type} .type-hidden`).classList.remove('animate-hidden');
+        document.querySelector(`.type-${type}`).classList.remove('selected-type');
+        this.setState({
+            selected_type : id
+        }, ()=>{
+            type = this.state.types[this.state.selected_type-1];
+            document.querySelector(`.type-${type} .type-hidden`).classList.add('animate-hidden');
+            document.querySelector(`.type-${type}`).classList.add('selected-type');
+        })
     }
 
 
@@ -34,7 +49,7 @@ class TypeContainer extends Component{
             <div className='type-container'>
                 {
                     this.state.types.map( (type, i) => {
-                        return <Type key={type} type={type} index={i} onTypeClick={()=>{this.props.onTypeClick(this.state.types_url[i])}}/>
+                        return <Type key={type} type={type} index={i+1} onTypeClick={this.onTypeClick}/>
                     })
                 }
             </div>

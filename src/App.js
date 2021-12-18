@@ -5,6 +5,7 @@ import CardList from './CardList';
 import SearchBox from './SearchBox';
 import Empty from './Empty'
 import './App.css';
+import colors from './colors';
 class App extends Component{
 
     constructor(){
@@ -32,11 +33,7 @@ class App extends Component{
                 page: 1,
                 query: "",
                 count : res.pokemon.map(p=> p.pokemon.name).length
-            }, ()=>{
-               
-                document.querySelector(`.type-${this.state.type} .type-hidden`).classList.toggle('animate-hidden');
             });
-          
         })
     }
 
@@ -46,7 +43,7 @@ class App extends Component{
         .then(res => res.json())
         .then(res =>{
             
-            document.querySelector(`.type-${this.state.type} .type-hidden`).classList.toggle('animate-hidden');
+            
             this.setState({
                 pokemons : res.pokemon.map(p=> p.pokemon.name),
                 urls : res.pokemon.map(p=>p.pokemon.url),
@@ -54,9 +51,6 @@ class App extends Component{
                 page : 1,
                 query : "",
                 count : res.pokemon.map(p=> p.pokemon.name).length
-            }, ()=>{
-                
-                document.querySelector(`.type-${this.state.type} .type-hidden`).classList.toggle('animate-hidden');
             })
             
         })
@@ -96,12 +90,15 @@ class App extends Component{
         return (
             
             <div>
-                <h1 className='app-title'>Pokédex Web App</h1>
-                <h5 className='api-link'><a href="https://pokeapi.co/" rel='noreferrer' target="_blank">Pokémon API</a></h5>
+                <h1 className='app-title'>Pok<span className='letter' style={{color : colors[this.state.type]}}>é</span>dex Web App</h1>
+                <h5 className='api-link'>
+                    <a href="https://pokeapi.co/" rel='noreferrer' target="_blank">Pokémon API</a>
+                    <a href="https://github.com/jonathanpizarra/pokedex-app" rel='noreferrer' target="_blank">Fork on Github</a>
+                </h5>
                 <TypeContainer onTypeClick={this.onTypeClick}/>
-                <h2 className='pokemon-count'>{type === "" ? "" : `${count} ${type} Type Pokemons`}</h2>
+                <h2 className='pokemon-count'>{type === "" ? "" : `${count} ${type} Type Pokémons`}</h2>
                 <SearchBox onTextChange={this.onTextChange} type={this.state.type} query={this.state.query}/>
-                <Pages page={this.state.page} query={this.state.query} count={this.state.count} onPageClick={this.onPageClick}/>
+                <Pages page={this.state.page} type={this.state.type} query={this.state.query} count={this.state.count} onPageClick={this.onPageClick}/>
                 {
                     this.state.pokemons.length === 0? 
                     <Empty/> : 
